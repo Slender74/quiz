@@ -48,7 +48,10 @@ def next_question():
     if current_question < len(quiz_data):
         show_question()
     else:
-        win.destroy()
+        finished_image = ctk.CTkImage(Image.open("pngtree-thunderous-congratulations-you-win-text-yellow-win-orange-vector-png-image_27237648.png"), size=(818, 360))
+        image_button = ctk.CTkButton(master=win, text="", image=finished_image, fg_color="transparent")
+        image_button.pack(padx=10, pady=10)
+        image_button.place(x=550, y=300)
 
 
 
@@ -65,7 +68,14 @@ ctk.set_default_color_theme("blue")
 win = ctk.CTk()
 win.geometry("1920x1080")
 frame = Frame(win, width=1920, height=1080)
+
 #Question label
+
+
+
+
+
+
 questionLabel = ctk.CTkLabel(
     win,
     text="Quiz",
@@ -87,7 +97,7 @@ for i in range(4):
 
 
     )
-    button.pack(pady= 5)
+    button.pack(pady=3)
     choice_btns.append(button)
 
 feedback_label = ctk.CTkLabel(
@@ -121,6 +131,14 @@ next_btn = ctk.CTkButton(
 
 )
 
+picture_frame = ctk.CTkImage(Image.open("Webcam.png"), size=(700, 500))
+frame_picture = ctk.CTkButton(master=win, text="", image=picture_frame, fg_color="transparent")
+frame_picture.pack(padx=1)
+frame_picture.place(x=1210, y=250)
+
+
+
+
 next_btn.place(x=860, y=950)
 
 
@@ -131,5 +149,6 @@ show_question()
 
 win.resizable(0,0)
 #Run app/main loop
+
 win.mainloop()
 
