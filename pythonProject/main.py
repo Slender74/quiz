@@ -4,6 +4,22 @@ import pygame
 from PIL import ImageTk, Image
 from questions import quiz_data
 import random
+import PyInstaller.__main__
+
+PyInstaller.__main__.run([
+    'main.py',
+    '--onefile',
+    '--windowed'
+])
+
+win = ctk.CTk()
+win.geometry("1920x1080")
+frame = Frame(win, width=1920, height=1080)
+
+bg = PhotoImage(file="3.png")
+my_bg = ctk.CTkLabel(win, image=bg)
+my_bg.place(x=0, y=0)
+
 
 
 #Functions to display current question and choices
@@ -27,7 +43,10 @@ def check_answer(choice):
         global score
         score += 1
         score_label.configure(text="Score: {}/{}".format(score,len(quiz_data)))
-        feedback_label.configure(text="Correct")
+        finished_image = ctk.CTkImage(Image.open("main-qimg-33bd93f43317e850eecf28606f868f7a-lq.jfif"),size=(500, 360))
+        image_button = ctk.CTkButton(master=win, text="", image=finished_image, fg_color="transparent")
+        image_button.pack(padx=10, pady=10)
+        image_button.place(x=100, y=300)
         pygame.mixer.music.load("Ding Sound Effect.mp3")
         pygame.mixer.music.play()
 
@@ -36,9 +55,14 @@ def check_answer(choice):
         feedback_label.configure(text="Incorrect")
         pygame.mixer.music.load("Wrong Buzzer Sound Effect.mp3")
         pygame.mixer.music.play()
+        finished_image = ctk.CTkImage(Image.open("Youre a super weeb!!! (1).png"), size=(500, 360))
+        image_button = ctk.CTkButton(master=win, text="", image=finished_image, fg_color="transparent")
+        image_button.pack(padx=10, pady=10)
+        image_button.place(x=100, y=300)
     for button in choice_btns:
         button.configure(state="disabled")
     next_btn.configure(state="normal")
+
 
 
 def next_question():
@@ -46,40 +70,33 @@ def next_question():
     current_question += 1
     if current_question < len(quiz_data):
         show_question()
-        count = 1
-        while count == 1:
-            number = random.randint(1, 6)
-            if number == 1:
-                myimg = "1.jpg"
-                count = 0
+        if current_question == 0:
+            bg = ctk.CTkImage(Image.open("3.png"))
+            my_bg = ctk.CTkLabel(master=win, image=bg)
+            my_bg.place(x=0, y=0)
+        elif current_question == 1:
+            bg = ctk.CTkImage("2.png")
+            my_bg = ctk.CTkLabel(master=win, image=bg)
+            my_bg.place(x=0, y=0)
+        elif current_question == 2:
+            bg = ctk.CTkImage("2.png")
+            my_bg = ctk.CTkLabel(master=win, image=bg)
+            my_bg.place(x=0, y=0)
+        elif current_question == 3:
+            bg = ctk.CTkImage("3.png")
+            my_bg = ctk.CTkLabel(master=win, image=bg)
+            my_bg.place(x=0, y=0)
+        else:
+            bg = ctk.CTkImage("3.png")
+            my_bg = ctk.CTkLabel(master=win, image=bg)
+            my_bg.place(x=0, y=0)
 
-            elif number == 2:
-                myimg = "2.jpg"
-                count = 0
-            elif number == 3:
-                myimg = "3.jpg"
-                count = 0
-            elif number == 4:
-                myimg = "4.jpg"
-                count = 0
-            elif number == 5:
-                myimg = "5.jpg"
-                count = 0
-            elif number == 6:
-                myimg = "6.jpg"
-                count = 0
-        bg = PhotoImage(file=myimg)
-        my_bg = ctk.CTkLabel(win, image=bg)
-        my_bg.place(x=0, y=0)
 
     else:
-        finished_image = ctk.CTkImage(Image.open("pngtree-thunderous-congratulations-you-win-text-yellow-win-orange-vector-png-image_27237648.png"), size=(818, 360))
+        finished_image = ctk.CTkImage(Image.open("Youre a super weeb!!!.png"), size=(1920, 1080))
         image_button = ctk.CTkButton(master=win, text="", image=finished_image, fg_color="transparent")
-        image_button.pack(padx=10, pady=10)
-        image_button.place(x=550, y=300)
-
-
-
+        image_button.pack(padx=0, pady=0)
+        image_button.place(x=0, y=0)
 
 
 #initialize sound
@@ -90,13 +107,6 @@ ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 #win frame
-win = ctk.CTk()
-win.geometry("1920x1080")
-frame = Frame(win, width=1920, height=1080)
-
-bg = PhotoImage(file="Untitled design.png")
-my_bg = ctk.CTkLabel(win, image=bg)
-my_bg.place(x=0, y=0)
 
 
 #Question label
@@ -117,7 +127,9 @@ questionLabel.pack(padx=10, pady=10)
 
 #choice buttons
 choice_btns = []
+num = 0
 for i in range(4):
+    num += 1
     button = ctk.CTkButton(
         win,
         font=("comicsans", 50),
@@ -127,15 +139,18 @@ for i in range(4):
 
 
     )
-    button.pack(pady=3)
+    button.pack(pady = 3)
     choice_btns.append(button)
 
 feedback_label = ctk.CTkLabel(
     win,
     text="Test",
+    font=("Comic_sans", 100),
     anchor=CENTER,
 )
 feedback_label.pack(pady=10)
+feedback_label.place(x=200, y=400)
+
 
 score_label = ctk.CTkLabel(
     win,

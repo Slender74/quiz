@@ -17,7 +17,7 @@ quiz_data = [
    {
        "question": "What is Luffy’s strongest Gear?",
        "choices": ["Gear 1", "Gear 5", "Super Saiyan", "Gear 7"],
-       "answer": "Gear 4"
+       "answer": "Gear 5"
    },
    {
        "question": "What is the name of Ichigo’s Zanpakuto?",
@@ -28,6 +28,17 @@ quiz_data = [
        "question": "Who is the strongest villain Ichigo fought?",
        "choices": ["Aizen", "Kugo Ginjo", "Grimmjow", "Yhwach"],
        "answer": "Yhwach"
+   },
+   {
+       "question": "What is the name of Zeke's Titan",
+       "choices": ["Attack Titan", "Female titan", "Jaw Titan", "Beast Titan"],
+       "answer": "Beast Titan"
+   },
+   {
+       "question": "What is Gon’s nen type?",
+       "choices": ["Specialization", "Emission", "Manipulation", "Enhancement"],
+       "answer": "Enhancement"
    }
+
 
 ]
